@@ -1,10 +1,11 @@
-<% const { artists: recommendedArtistItems } = locals.recommendedArtists; const
-{ items: newReleaseItems, next: newReleaseNext, } = locals.newRelease; const {
-message: featuredPlaylistTitle, playlists: { items: featuredPlaylistItems, next:
-featuredPlaylistNext }, } = locals.featuredPlaylist; %>
+<% const { artists: recommendedArtistItems }=locals.recommendedArtists; const { items: newReleaseItems, next:
+  newReleaseNext, }=locals.newRelease; const { message: featuredPlaylistTitle, playlists: { items:
+  featuredPlaylistItems, next: featuredPlaylistNext }, }=locals.featuredPlaylist; const { playlists: { items:
+  topPlaylistItems, next: topPlaylistNext, } }=locals.topPlaylist; %>
 
-<!DOCTYPE html>
-<html lang="en">
+  <!DOCTYPE html>
+  <html lang="en">
+
   <head>
     <%- include('../layouts/head', {title: 'Home | Laguin' }); %>
   </head>
@@ -13,121 +14,152 @@ featuredPlaylistNext }, } = locals.featuredPlaylist; %>
     <article class="page custom-scrollbar">
       <!--
             - #TOP APP BAR
-        -->
+      -->
       <%- include('../partials/top_bar', locals.currentProfile) %>
 
-      <!--
+        <!--
             - #BOTTOM NAV
       -->
-      <%- include('../partials/bottom_nav', { currentRoute: '/' }) %>
+        <%- include('../partials/bottom_nav', { currentRoute: '/' }) %>
 
-      <div class="main" data-main>
-        <!--
+          <div class="main" data-main>
+            <!--
             - #RECOMMENDED ALBUMS
         -->
-        <% if (locals.recommendedAlbums.length) { %>
-        <section class="section">
-          <div class="title-wrapper">
-            <h2 class="title-large section-title">Recommended for you</h2>
-          </div>
+            <% if (locals.recommendedAlbums.length) { %>
+              <section class="section">
+                <div class="title-wrapper">
+                  <h2 class="title-large section-title">Recommended for you</h2>
+                </div>
 
-          <div class="slider">
-            <div class="slider-inner">
-              <% locals.recommendedAlbums.forEach(({ album: { artists, images,
-              name:title, id, uri}}) => { %> <% const text = artists.map(({ name
-              }) => name).join(', '); const image = images.find(item =>
-              item.width === 300); %> <%- include("../partials/card", { image,
-              type: 'album', title, text, link: `/album/${id}`, uri }) %> <% })
-              %>
-            </div>
-          </div>
-        </section>
-        <% } %>
+                <div class="slider">
+                  <div class="slider-inner">
+                    <% locals.recommendedAlbums.forEach(({ album: { artists, images, name:title, id, uri}})=> { %> <%
+                        const text=artists.map(({ name })=> name).join(', '); const image = images.find(item =>
+                        item.width === 300); %> <%- include('../partials/card', { image, type: 'album' , title, text,
+                          link: `/album/${id}`, uri }) %>
+                          <% }) %>
+                  </div>
+                </div>
+              </section>
+              <% } %>
 
-        <!--
+                <!--
             - #RECOMMENDED ARTISTS
         -->
-        <% if (recommendedArtistItems.length) { %>
-        <section class="section">
-          <div class="title-wrapper">
-            <h2 class="title-large section-title">Artist for you</h2>
-          </div>
+                <% if (recommendedArtistItems.length) { %>
+                  <section class="section">
+                    <div class="title-wrapper">
+                      <h2 class="title-large section-title">Artist for you</h2>
+                    </div>
 
-          <div class="slider">
-            <div class="slider-inner">
-              <% recommendedArtistItems.forEach(({ name: title, type, images,
-              id, uri }) => { %> <% const [image] = images || [] %> <%-
-              include("../partials/card", { variant: 'artist-card', title,
-              image, type, text: type, link: `/artist/${id}`, uri }) %> <% }) %>
-            </div>
-          </div>
-        </section>
-        <% } %>
+                    <div class="slider">
+                      <div class="slider-inner">
+                        <% recommendedArtistItems.forEach(({ name: title, type, images, id, uri })=> { %> <% const
+                            [image]=images || [] %> <%- include('../partials/card', { variant: 'artist-card' , title,
+                              image, type, text: type, link: `/artist/${id}`, uri }) %>
+                              <% }) %>
+                      </div>
+                    </div>
+                  </section>
+                  <% } %>
 
-        <!--
+                    <!--
             - #NEW RELEASE ALBUMS
         -->
-        <section class="section">
-          <div class="title-wrapper">
-            <h2 class="title-large section-title">New Releases</h2>
+                    <section class="section">
+                      <div class="title-wrapper">
+                        <h2 class="title-large section-title">New Releases</h2>
 
-            <% if (newReleaseNext !== null) { %>
-            <a href="/album" class="btn btn-link" data-ripple>
-              <span class="label-large">See all</span>
+                        <% if (newReleaseNext !==null) { %>
+                          <a href="/album" class="btn btn-link" data-ripple>
+                            <span class="label-large">See all</span>
 
-              <div class="state-layer"></div>
-            </a>
-            <% } %>
-          </div>
+                            <div class="state-layer"></div>
+                          </a>
+                          <% } %>
+                      </div>
 
-          <div class="slider">
-            <div class="slider-inner">
-              <% newReleaseItems.forEach(({ id, images, name: title, artists,
-              uri}) => { %> <% const text = artists.map(({ name }) =>
-              name).join(', '); const image = images.find(item => item.width ===
-              300); %> <%- include("../partials/card", { image, type: 'album',
-              title, text, link: `/album/${id}`, uri }) %> <% }) %>
-            </div>
-          </div>
-        </section>
+                      <div class="slider">
+                        <div class="slider-inner">
+                          <% newReleaseItems.forEach(({ id, images, name: title, artists, uri})=> { %> <% const
+                              text=artists.map(({ name })=>
+                              name).join(', '); const image = images.find(item => item.width ===
+                              300); %> <%- include('../partials/card', { image, type: 'album' , title, text, link:
+                                `/album/${id}`, uri }) %>
+                                <% }) %>
+                        </div>
+                      </div>
+                    </section>
 
-        <!--
+                    <!--
             - #FEATURED PLAYLISTS
         -->
-        <section class="section">
-          <div class="title-wrapper">
-            <h2 class="title-large section-title">
-              <%=featuredPlaylistTitle%>
-            </h2>
+                    <section class="section">
+                      <div class="title-wrapper">
+                        <h2 class="title-large section-title">
+                          <%=featuredPlaylistTitle%>
+                        </h2>
 
-            <% if (featuredPlaylistNext !== null) { %>
-            <a href="/playlist" class="btn btn-link" data-ripple>
-              <span class="label-large">See all</span>
+                        <% if (featuredPlaylistNext !==null) { %>
+                          <a href="/playlist" class="btn btn-link" data-ripple>
+                            <span class="label-large">See all</span>
 
-              <div class="state-layer"></div>
-            </a>
-            <% } %>
-          </div>
+                            <div class="state-layer"></div>
+                          </a>
+                          <% } %>
+                      </div>
 
-          <div class="slider">
-            <div class="slider-inner">
-              <% featuredPlaylistItems.forEach(({ id, images, name: title,
-              description, uri}) => { %> <% const [image] = images || [] %> <%-
-              include("../partials/card", { image, type: 'playlist', title,
-              text: description, link: `/playlist/${id}`, uri }) %> <% }) %>
-            </div>
-          </div>
-        </section>
+                      <div class="slider">
+                        <div class="slider-inner">
+                          <% featuredPlaylistItems.forEach(({ id, images, name: title, description, uri})=> { %> <%
+                              const [image]=images || [] %> <%- include('../partials/card', { image, type: 'playlist' ,
+                                title, text: description, link: `/playlist/${id}`, uri }) %>
+                                <% }) %>
+                        </div>
+                      </div>
+                    </section>
 
-        <!--
+                    <!--
             - #TOP PLAYLISTS
         -->
-      </div>
+                    <section class="section">
+                      <div class="title-wrapper">
+                        <h2 class="title-large section-title">Top Playlists</h2>
 
-      <!--
+                        <% if (topPlaylistNext !==null) { %>
+                          <a href="/explore/toplists" class="btn btn-link" data-ripple>
+                            <span class="label-large">See all</span>
+
+                            <div class="state-layer"></div>
+                          </a>
+                          <% } %>
+                      </div>
+
+                      <div class="slider">
+                        <div class="slider-inner">
+                          <% topPlaylistItems.forEach(({ id, images, name: title, description, uri})=> { %> <% const
+                              [image]=images || [] %> <%- include('../partials/card', { image, type: 'playlist' , title,
+                                text: description, link: `/playlist/${id}`, uri }) %>
+                                <% }) %>
+                        </div>
+                      </div>
+                    </section>
+          </div>
+
+          <!--
             - #FOOTER
       -->
-      <%- include('../layouts/footer') %>
+          <%- include('../layouts/footer') %>
+
+            <!--
+        - #PLAYER SM
+      -->
+            <%- include('../partials/player_sm') %>
+
+              <!-- PLAYER LG -->
+              <%- include('../partials/player_lg') %>
     </article>
   </body>
-</html>
+
+  </html>

@@ -127,6 +127,7 @@
   0% {
     scale: 0;
   }
+
   100% {
     scale: 2.5;
   }
@@ -306,6 +307,7 @@
     transform: translate(-50%, -50%) scale(1);
     visibility: visible;
   }
+
   100% {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.5);
@@ -328,6 +330,7 @@
     opacity: 0;
     visibility: hidden;
   }
+
   100% {
     opacity: 1;
     visibility: visible;
@@ -602,3 +605,209 @@
   color: var(--on-surface-variant);
   --state-layer-bg: var(--on-surface);
 }
+
+/**
+ * Player
+ */
+
+.player-sm {
+  position: fixed;
+  left: 0;
+  bottom: var(--bottom-nav-height);
+  width: 100%;
+  background-color: var(--surface-container);
+  color: var(--on-surface-variant);
+  --state-layer-bg: var(--on-surface-variant);
+  height: var(--player-sm-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  padding-inline: var(--space-4) var(--space-2);
+  box-shadow: var(--shadow-2);
+  transition: var(--tr-duration-short-4) var(--tr-easing-emphasized);
+  z-index: 3;
+}
+
+.track-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.track-banner {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-small);
+  flex-shrink: 0;
+}
+
+.track-title {
+  color: var(--on-surface);
+  margin-block-end: var(--space-1);
+}
+
+.track-text {
+  opacity: 0.7;
+}
+
+.player-sm .play-btn {
+  z-index: 2;
+}
+
+.progress {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+}
+
+.progress::-webkit-progress-bar {
+  background-color: var(--surface-container-highest);
+}
+
+.progress::-webkit-progress-value {
+  height: 1px;
+  background-color: var(--primary);
+}
+
+.track-view-btn {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.player-sm.hide {
+  display: none;
+}
+
+/**
+ * Player lg
+ */
+
+.player-lg {
+  position: fixed;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: var(--surface-container-low);
+  padding-inline: var(--space-6);
+  padding-block-end: var(--space-10);
+  z-index: 6;
+  border-top-right-radius: var(--radius-extra-large);
+  border-top-left-radius: var(--radius-extra-large);
+  color: var(--on-surface-variant);
+  visibility: hidden;
+  transition: var(--tr-duration-medium-2) var(--tr-easing-emphasized);
+}
+
+.player-lg.active {
+  transform: translateY(-100%);
+  visibility: visible;
+}
+
+.player-lg .handle {
+  width: 100%;
+  height: 48px;
+  display: grid;
+  place-items: center;
+}
+
+.player-lg .handle-indicator {
+  width: 32px;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background-color: var(--on-surface-variant);
+  opacity: 0.4;
+}
+
+.player-lg .track-info {
+  gap: var(--space-6);
+}
+
+.player-lg .track-banner {
+  width: 96px;
+  height: 96px;
+}
+
+.player-range-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+  padding-block: var(--space-6) var(--space-4);
+}
+
+.player-range {
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.player-range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: var(--radius-full);
+}
+
+.player-range::-webkit-slider-thumb {
+  --shadow-spread: 0px;
+  height: 20px;
+  width: 20px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 0 var(--shadow-spread) #12e29a14, 0 1px 3px 1px #00000026,
+    0 1px 2px 0 #0000004d;
+  margin-top: -6px;
+  transition: var(--tr-duration-short-2) var(--tr-easing-standard);
+}
+
+.player-range::-webkit-slider-thumb:hover {
+  --shadow-spread: 10px;
+}
+
+.player-range-wrapper .player-range {
+  order: -1;
+}
+
+.player-control-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.player-control-btns .icon {
+  font-variation-settings: "FILL" 1;
+}
+
+.player-volume {
+  display: none;
+}
+
+.player-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--black);
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--tr-duration-short-2) var(--tr-easing-linear);
+  z-index: 4;
+}
+
+.player-overlay.active {
+  opacity: 0.5;
+  visibility: visible;
+}
+
+/*-----------------------------------*\
+  #MEDIA QUERIES
+\*-----------------------------------*/
+
+/**
+ * responsive for larger than 768px screen
+ */

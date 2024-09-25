@@ -14,11 +14,11 @@ import { addEventOnElems } from "./utils.js";
  * Search clear functionality
  */
 const /** {HTMLElement} */ $searchField = document.querySelector(
-    "[data-search-field]"
-  );
+  "[data-search-field]"
+);
 const /** {HTMLElement} */ $searchClear = document.querySelector(
-    "[data-search-clear]"
-  );
+  "[data-search-clear]"
+);
 
 $searchClear?.addEventListener("click", function () {
   $searchField.value = "";
@@ -38,11 +38,11 @@ if (!sessionStorage.getItem("logoAnimated")) {
  * Menu toggle
  */
 const /** {HTMLElement} */ $menuWrapper = document.querySelector(
-    "[data-menu-wrapper]"
-  );
+  "[data-menu-wrapper]"
+);
 const /** {HTMLElement} */ $menuToggler = document.querySelector(
-    "[data-menu-toggler]"
-  );
+  "[data-menu-toggler]"
+);
 
 $menuToggler?.addEventListener("click", function () {
   $menuWrapper.classList.toggle("active");
@@ -92,9 +92,9 @@ const ripple = function ($rippleElem) {
     this.addEventListener("pointerleave", removeRipple);
 
     const /** {number} */ rippleSize = Math.max(
-        this.clientWidth,
-        this.clientHeight
-      );
+      this.clientWidth,
+      this.clientHeight
+    );
 
     $ripple.style.top = `${event.layerY}px`;
     $ripple.style.left = `${event.layerX}px`;
@@ -104,7 +104,7 @@ const ripple = function ($rippleElem) {
 };
 
 const /** {HTMLElement} */ $rippleElems =
-    document.querySelectorAll("[data-ripple]");
+  document.querySelectorAll("[data-ripple]");
 $rippleElems?.forEach((item) => ripple(item));
 
 /**
@@ -112,8 +112,8 @@ $rippleElems?.forEach((item) => ripple(item));
  */
 window.addEventListener("DOMContentLoaded", function () {
   const /** {Array<HTMLElement>} */ $animatedImages = document.querySelectorAll(
-      "[data-image-load-anim]"
-    );
+    "[data-image-load-anim]"
+  );
 
   const addAnimation = function () {
     this.animate(
@@ -140,11 +140,11 @@ window.addEventListener("DOMContentLoaded", function () {
  */
 
 const /** {Array<HTMLElement>} */ $bottomNavItems = document.querySelectorAll(
-    "[data-bottom-nav-item]"
-  );
+  "[data-bottom-nav-item]"
+);
 const /** {HTMLElement} */ $activeBottomNavItem = document.querySelector(
-    "[data-bottom-nav-item].active"
-  );
+  "[data-bottom-nav-item].active"
+);
 
 const activeNavItem = function () {
   $activeBottomNavItem?.classList.remove("active");
@@ -152,3 +152,23 @@ const activeNavItem = function () {
 };
 
 $bottomNavItems && addEventOnElems($bottomNavItems, "click", activeNavItem);
+
+/**
+ * Player modal toggle
+ */
+const /** {HTMLElement} */ $modalPlayer = document.querySelector(
+  "[data-modal-player]"
+);
+const /** {Array<HTMLElement>} */ $modalPlayerTogglers =
+  document.querySelectorAll("[data-modal-player-toggler]");
+const /** {HTMLElement} */ $modalPlayerOverlay = document.querySelector(
+  "[data-player-overlay]"
+);
+
+const toggleModalPlayer = function () {
+  $modalPlayer.classList.toggle("active");
+  $modalPlayerOverlay.classList.toggle("active");
+};
+
+$modalPlayerTogglers &&
+  addEventOnElems($modalPlayerTogglers, "click", toggleModalPlayer);

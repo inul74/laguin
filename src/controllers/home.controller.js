@@ -53,6 +53,10 @@ const home = async (req, res) => {
   );
 
   // top playlists
+  const topPlaylist = await playlistApi.getCategoryPlaylist(
+    req,
+    apiConfig.LOW_LIMIT
+  );
 
   res.render("./pages/home", {
     currentProfile,
@@ -61,7 +65,7 @@ const home = async (req, res) => {
     recommendedArtists,
     newRelease,
     featuredPlaylist,
-    // topPlaylist,
+    topPlaylist,
   });
 };
 

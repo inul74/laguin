@@ -32,7 +32,9 @@ const SCOPE = process.env.SCOPE;
 const STATE_KEY = "spotify_auth_state";
 
 // Api request queries
-const MARKET = ["US", "GB", "ID"];
+const MARKET = ["US", "ID"].join(",");
+
+// Api request limit
 const LOW_LIMIT = 12;
 const DEFAULT_LIMIT = 28;
 

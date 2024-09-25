@@ -35,7 +35,7 @@ const getFeatured = async (req, itemLimit) => {
  */
 const getCategoryPlaylist = async (req, itemLimit) => {
   const { limit, offset, page } = getUrlQuery(req.params, itemLimit);
-  const { categoryId = "pop" } = req.params;
+  const { categoryId = "toplists" } = req.params;
 
   const { data: catPlaylist } = await getData(
     `browse/categories/${categoryId}/playlists?limit=${limit}&offset=${offset}`,
